@@ -1,0 +1,30 @@
+table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.mat-sort-header-container {
+  align-items: center;
+}
+
+th {
+  background-color: rgb(67,114,196);
+  color: #fff;
+  font-weight: bold;
+}
+
+.mat-row:nth-child(even){
+  background-color: rgba(67,114,196,0.1)
+}
+
+.mat-row:nth-child(odd){
+  background-color: rgba(67,114,196,0.3)
+}
+
+::ng-deep .mat-sort-header-arrow {
+  color: #fff;
+}
