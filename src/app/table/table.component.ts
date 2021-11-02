@@ -3,9 +3,9 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {take, takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
-import {DataService} from "../data.service";
 import {Category, Item} from "../models";
-import {HelpService} from "../help.service";
+import {HelpService} from "../services/help.service";
+import {DataService} from "../services/data.service";
 
 @Component({
   selector: 'app-table',
@@ -68,7 +68,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((type: string) => {
         if (type) {
           this.type = type;
-          const items = this.fullData.filter(subject => subject.title === type)[0].items.filter(item => HelpService.filterItemBySearch(item, this.searchingText, this.type));
+          const items = this.fullData.filter(subject => subject.title === type)[0].items.filter(item => HelpService.filterItemBySearch(item, this.searchingText));
           this.dataSource = new MatTableDataSource(items);
           this.dataSource.sort = this.sort;
           this.updateColumns();
@@ -81,7 +81,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((text: string) => {
         this.searchingText = text;
-        const items = this.fullData.filter(subject => subject.title === this.type)[0].items.filter(item => HelpService.filterItemBySearch(item, this.searchingText, this.type));
+        const items = this.fullData.filter(subject => subject.title === this.type)[0].items.filter(item => HelpService.filterItemBySearch(item, this.searchingText));
         this.dataSource = new MatTableDataSource(items);
         this.dataSource.sort = this.sort;
         this.updateColumns();
